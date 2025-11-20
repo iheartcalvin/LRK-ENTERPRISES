@@ -1,0 +1,101 @@
+:root {
+    --green: #1375bc;
+    --pink: #2db5ff;
+    --dark: #0f1010;
+  }
+  
+  .dq-section {
+    padding: 80px 20px;
+    background: #0f0f10;
+    color: white;
+    text-align: center;
+  }
+  
+  .dq-title {
+    font-size: 36px;
+    margin-bottom: 10px;
+    font-weight: 800;
+    text-shadow: 0 0 8px rgba(16, 84, 124, 0.3);
+  }
+  
+  .dq-subtitle {
+    margin-top: 0;
+    margin-bottom: 40px;
+    color: #888;
+    font-size: 18px;
+  }
+  
+  .dq-form-wrapper {
+    max-width: 700px;
+    margin: auto;
+    background: rgba(255, 255, 255, 0.04);
+    padding: 30px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(10px);
+  }
+  
+  .dq-field {
+    text-align: left;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+  
+  .dq-field label {
+    display: block;
+    margin-bottom: 5px;
+    color: #ccc;
+  }
+  
+  .dq-field select,
+  .dq-field input,
+  .dq-field textarea {
+    width: 100%;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.06);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    font-family: inherit;
+  }
+  
+  .dq-field textarea {
+    resize: vertical;
+  }
+  
+  .file-input {
+    padding: 10px;
+    background: transparent;
+    border: 1px dashed rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+  }
+  
+  .dq-row {
+    display: flex;
+    gap: 20px;
+  }
+  
+  @media (max-width: 600px) {
+    .dq-row {
+      flex-direction: column;
+      gap: 0;
+    }
+  }
+  
+  .dq-btn {
+    margin-top: 20px;
+    padding: 14px 20px;
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(90deg, var(--green), #0fa012);
+    cursor: pointer;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    box-shadow: 0 0 15px rgba(16, 72, 124, 0.4);
+  }
+  
+  .dq-btn:hover {
+    box-shadow: 0 0 20px rgba(17, 124, 217, 0.8);
+  }

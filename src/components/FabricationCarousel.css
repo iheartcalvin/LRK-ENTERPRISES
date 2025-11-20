@@ -1,0 +1,90 @@
+:root {
+    --green: #00aaff;
+    --pink: #0050d0;
+  }
+  
+  .fab-carousel-section {
+    padding: 80px 20px;
+    text-align: center;
+    color: white;
+    background: #0f0f10;
+  }
+  
+  .fab-carousel-title {
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 40px;
+    text-shadow: 0 0 10px rgba(34, 148, 255, 0.3);
+  }
+  
+  .fab-carousel-wrapper {
+    position: relative;
+    max-width: 900px;
+    margin: auto;
+    border-radius: 16px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(10px);
+    padding: 10px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  
+  .fab-carousel-img {
+    width: 100%;
+    border-radius: 14px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.6);
+  }
+  
+  .fab-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.1);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    color: white;
+    font-size: 26px;
+    cursor: pointer;
+    backdrop-filter: blur(6px);
+  }
+  
+  .fab-prev { left: 10px; }
+  .fab-next { right: 10px; }
+  
+  .fab-nav:hover {
+    background: rgba(16, 93, 124, 0.3);
+    box-shadow: 0 0 10px rgba(16, 83, 124, 0.4);
+  }
+  
+  /* Thumbnails */
+  .fab-thumbs {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .fab-thumb {
+    width: 70px;
+    height: 70px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid transparent;
+    background: rgba(255,255,255,0.04);
+    cursor: pointer;
+  }
+  
+  .fab-thumb.active {
+    border-color: var(--green);
+    box-shadow: 0 0 8px rgba(20, 125, 200, 0.6);
+  }
+  
+  .fab-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
