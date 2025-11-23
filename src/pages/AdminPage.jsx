@@ -4,7 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import emailjs from '@emailjs/browser'; 
 import '../components/AdminDashboard.css'; 
 
+
 const CATEGORIES = ['Electronic Parts Supply', 'Fabrication Services', 'Repair & Maintenance', 'Tech Manufacturing'];
+const CAROUSEL_CATEGORIES = ['Fabrication', 'Machines'];
 const ADMIN_PASSWORD = 'lrk2025'; // <<< CHANGE THIS PASSWORD
 
 export default function AdminPage() {
@@ -16,10 +18,15 @@ export default function AdminPage() {
   // Data State
   const [projects, setProjects] = useState([]);
   const [inbox, setInbox] = useState([]);
+  const [carousels, setCarousels] = useState([]);
   
   // Project Form State
   const [form, setForm] = useState({ title: '', desc: '', category: CATEGORIES[0], images: [], location: '', date: '' });
   const [editingId, setEditingId] = useState(null);
+
+  // Carousel Form State <-- NEW STATE for Carousels
+  const [carouselForm, setCarouselForm] = useState({ name: '', desc: '', category: CAROUSEL_CATEGORIES[0], image: '' });
+  const [editingCarouselId, setEditingCarouselId] = useState(null);
 
   // Reply State
   const [response, setResponse] = useState({ price: '', message: '', msgId: null });
@@ -28,8 +35,9 @@ export default function AdminPage() {
 
   useEffect(() => {
     const loadData = () => {
-      setProjects(JSON.parse(localStorage.getItem('lrk-projects') || '[]'));
-      setInbox(JSON.parse(localStorage.getItem('lrk-quotes') || '[]'));
+        setProjects(JSON.parse(localStorage.getItem('lrk-projects') || '[]'));
+        setInbox(JSON.parse(localStorage.getItem('lrk-quotes') || '[]'));
+        setCarousels(JSON.parse(localStorage.getItem('lrk-carousels') || '[]'));
     };
     loadData();
     window.addEventListener('storage', loadData);
@@ -140,6 +148,13 @@ export default function AdminPage() {
     else alert('Wrong password!');
   };
 
+  const saveCarousels = (newCarousels) => { // <-- NEW FUNCTION
+    localStorage.setItem('lrk-carousels', JSON.stringify(newCarousels));
+    setCarousels(newCarousels);
+    setCarouselForm({ name: '', desc: '', category: CAROUSEL_CATEGORIES[0], image: '' });
+    setEditingCarouselId(null);
+  };
+
   // --- PROJECT FUNCTIONS ---
   const saveProjects = (newProjects) => {
     try {
@@ -170,13 +185,45 @@ export default function AdminPage() {
     saveProjects(updated);
     setForm({ title: '', desc: '', category: CATEGORIES[0], images: [], location: '', date: '' });
     setEditingId(null);
+
+
   };
+
+  const handleCarouselImage = (e) => { // <-- NEW FUNCTION
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => setCarouselForm(p => ({ ...p, image: reader.result }));
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const submitCarousel = (e) => { 
+    e.preventDefault();
+    if (!carouselForm.image || !carouselForm.image.startsWith('/') && !carouselForm.image.startsWith('http')) {
+        alert('Please enter a valid Image URL (must start with / or http).');
+        return;
+    }
+
+    const item = { ...carouselForm, id: editingCarouselId || Date.now(), desc: carouselForm.desc || carouselForm.name };
+
+    let newCarousels;
+    if (editingCarouselId) {
+      newCarousels = carousels.map(c => c.id === editingCarouselId ? item : c);
+    } else {
+      newCarousels = [...carousels, item];
+    }
+    saveCarousels(newCarousels);
+  };
+
+  
+
 
   if (!isAuthenticated) {
     return (
       <div className="admin-login-fullpage">
         <motion.div className="login-box" animate={{ scale: 1, opacity: 1 }}>
-          <h1>LRK ADMIN</h1>
+          <img src="/LRK.svg" alt="LRK Logo" className="login-logo" />
           <form onSubmit={login}>
             <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
             <button type="submit">ENTER</button>
@@ -191,12 +238,16 @@ export default function AdminPage() {
       <div className="admin-header-full">
         <h1>LRK DASHBOARD</h1>
         <div className="tabs">
-          <button className={activeTab === 'inbox' ? 'active' : ''} onClick={() => setActiveTab('inbox')}>
-            Inbox ({inbox.filter(q => q.status === 'Pending').length})
-          </button>
-          <button className={activeTab === 'projects' ? 'active' : ''} onClick={() => setActiveTab('projects')}>
-            Projects
-          </button>
+        <button className={activeTab === 'inbox' ? 'active' : ''} onClick={() => setActiveTab('inbox')}>
+                Inbox ({inbox.filter(q => q.status === 'Pending').length})
+            </button>
+            <button className={activeTab === 'projects' ? 'active' : ''} onClick={() => setActiveTab('projects')}>
+                Projects ({projects.length})
+            </button>
+            {/* NEW TAB */}
+            <button className={activeTab === 'carousels' ? 'active' : ''} onClick={() => setActiveTab('carousels')}>
+                Carousels ({carousels.length})
+            </button>
         </div>
         <button onClick={() => navigate('/')}>Exit</button>
       </div>
@@ -286,7 +337,7 @@ export default function AdminPage() {
                     type="file" 
                     accept=".pdf, image/*"
                     onChange={(e) => setReplyFile(e.target.files[0])}
-                    style={{border:'1px dashed #555', padding:'10px', background:'#111'}}
+                    style={{border:'1px dashed #555', padding:'10px', background:'#111', width:'95%'}}
                   />
                   {replyFile && <p style={{fontSize:'0.8rem', marginTop:'5px', color:'#ccc'}}>{replyFile.name} ready to upload.</p>}
 
@@ -303,6 +354,73 @@ export default function AdminPage() {
           </div>
         )}
 
+{activeTab === 'carousels' && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="admin-content" key="carousels">
+            <div className="admin-form">
+              <h3>{editingCarouselId ? 'Edit' : 'Add New'} Carousel Item</h3>
+              <form onSubmit={submitCarousel} className="project-form">
+                <input
+                  placeholder="Item Name (e.g. Smart Clove Dryer)"
+                  value={carouselForm.name}
+                  onChange={e => setCarouselForm({ ...carouselForm, name: e.target.value })}
+                  required
+                />
+                <textarea
+                  placeholder="Short Description (used for info section)"
+                  value={carouselForm.desc}
+                  onChange={e => setCarouselForm({ ...carouselForm, desc: e.target.value })}
+                  rows="3"
+                />
+                <select
+                  value={carouselForm.category}
+                  onChange={e => setCarouselForm({ ...carouselForm, category: e.target.value })}
+                  required
+                >
+                  {CAROUSEL_CATEGORIES.map(c => <option key={c}>{c}</option>)}
+                </select>
+                
+                {/* FIX: Replaced file upload with a URL input */}
+                <div className="image-section">
+                    <input
+                        placeholder="Image URL (e.g., /machines/clove-dryer.jpg)"
+                        value={carouselForm.image}
+                        onChange={e => setCarouselForm({ ...carouselForm, image: e.target.value })}
+                        required
+                    />
+                    <p className="hint-text">
+                        **NOTE:** Images must be hosted (e.g., in your `/public` folder or a CDN) and referenced by URL.
+                        Direct file upload was removed to prevent the Local Storage Quota Exceeded error.
+                    </p>
+
+                    <div className="image-previews">
+                        {carouselForm.image && (
+                            <div className="thumb" style={{ width: '100px', height: '100px' }}>
+                                <img src={carouselForm.image} alt="preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                            </div>
+                        )}
+                    </div>
+                </div>
+
+                <button type="submit">{editingCarouselId ? 'Update Item' : 'Add Item'}</button>
+              </form>
+            </div>
+
+            <div className="projects-list">
+               <h2>Carousel Items ({carousels.length})</h2>
+               {carousels.map(c => (
+                <div key={c.id} className="project-item">
+                  <div className="p-img">{c.image && <img src={c.image} alt="t" />}</div>
+                  <div className="p-info"><strong>{c.name}</strong><small>{c.category}</small></div>
+                  <div className="actions">
+                    <button onClick={() => { setCarouselForm(c); setEditingCarouselId(c.id); }}>Edit</button>
+                    <button onClick={() => saveCarousels(carousels.filter(x => x.id !== c.id))} className="del">Del</button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        )}
+        
         {/* === PROJECTS TAB === */}
         {activeTab === 'projects' && (
            <>

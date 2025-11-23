@@ -21,7 +21,7 @@ function SideBar() {
   return (
     <div className={`sidebar ${collapsed ? "collapsed" : ""}`}>
       <button className='close' onClick={() => setCollapsed(!collapsed)}>
-        {collapsed ? ">" : "X"}
+        {collapsed ? "=" : "X"}
       </button>
 
       <ul className='sidebarList'>
@@ -33,12 +33,11 @@ function SideBar() {
         </li>
 
         {/* SERVICES + DROPDOWN */}
-        <li className='row' onClick={() => !collapsed && setServicesOpen(!servicesOpen)}>
+        <li className='row' onClick={() => setServicesOpen(!servicesOpen)}> 
           <div className="icon"><BuildIcon /></div>
           {!collapsed && (
-            <div className="title" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              Services
-              {servicesOpen ? <ExpandLessIcon fontSize="small" /> : <ExpandMoreIcon fontSize="small" />}
+            <div className="title">
+              Services {servicesOpen ? <ExpandLessIcon /> : <ExpandMoreIcon />}
             </div>
           )}
           {collapsed && <span className="tooltip">Services</span>}

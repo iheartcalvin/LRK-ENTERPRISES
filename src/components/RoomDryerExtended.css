@@ -92,7 +92,7 @@
   /* quick CTA pair */
   .rde-quick { display:flex; gap:12px; margin-top:8px; }
   .rde-cta {
-    background: linear-gradient(90deg, var(--rde-green), #2277ff);
+    background: linear-gradient(90deg, var(--rde-green), rgb(34, 119, 255));
     color: #fff;
     padding: 10px 14px;
     border-radius: 10px;
@@ -121,7 +121,14 @@
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 24px rgba(16, 75, 124, 0.02);
   }
   
+  
   /* titles */
+
+  .rde-title{
+    text-align: center;
+  }
+
+
   .rde-card-title {
     color: var(--rde-green);
     margin: 6px 0 12px 0;
@@ -219,3 +226,13 @@
     object-fit: cover;
   }
   
+  @media (max-width: 600px) {
+    rde-title{
+        text-align: center;
+      }
+
+      .rde-title h1{
+        font-size: 26px;
+      }
+    
+  }

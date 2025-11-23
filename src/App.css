@@ -340,26 +340,20 @@ body{
 .Hero {
   display: flex;
   background-color: black;
-  justify-content: center;
-  align-items: center;
-  gap: 30px;
-  padding: 30px 20px;
-  overflow: hidden;
+  align-self: start;
   min-height: 100vh;           /* allow content to grow */
-  flex-wrap: wrap;             /* allow wrapping on small screens */
+  flex-wrap: wrap;       
+  position: relative;
+  padding: 60px 80px;
+  
+       /* allow wrapping on small screens */
 }
 
 
 
-.Hero .split .tools{
-  display: flex;
-  flex-direction: column;
-  max-width: 400px;
-}
 
-.Hero .split .tools h1{
-  color: #ffff;
-}
+
+
 .Hero .split .toolimg{
   display: flex;
   justify-content: center;
@@ -377,7 +371,7 @@ body{
 
 .about{
   backdrop-filter: blur(10px);
-  background-color: rgba(0, 39, 90, 0.291);  color: white;
+  background-color: #00275a4a;  color: white;
   border-radius: 10px;
   height: 100%;
   width: 400px;
@@ -385,7 +379,7 @@ body{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 20px 10px;
   margin: 0;
   position: relative;
   z-index: 1;
@@ -406,19 +400,15 @@ body{
 
  .Skill{
   backdrop-filter: blur(10px);
-  background-color: #0385ff;  color: white;
+  background-color: #00275a4a;
+  color: white;
   border-radius: 10px;
-  border: solid  rgba(255, 255, 255, 0.232) 2px;
-  padding: 20px;
-  max-width: 250px;
-  display: flex;
-  justify-content: center;
+  border: none;
   align-items: center;
-  flex-direction: column;
-  gap: 20px; 
-  margin: 0;
+  margin: 10px;
   font-size: 12px;
-  height: 700px;
+  padding: 10px 20px;
+  width: inherit;
 
 
 }
@@ -435,32 +425,26 @@ body{
 
   padding: 10px;
   border-radius: 10px;
-  border: 2px solid rgba(255, 255, 255, 0.232);
 }
 
 .Skill .rate .graphics {
   padding: 10px;
   border-radius: 10px;
-  border: 2px solid rgba(255, 255, 255, 0.232);
 }
 
 .Skill .rate .compmain {
   padding: 10px;
   border-radius: 10px;
-  border: 2px solid rgba(255, 255, 255, 0.232);
 }
 
 .Skill .rate .software {
   padding: 10px;
   border-radius: 10px;
-  border: 2px solid rgba(255, 255, 255, 0.232);
 }
 
-.Skill .rate .web .bar{
-  width: 300px;
-  height: 4px;
-  background-color: #0385ff;
-}
+
+
+
 
 .Skill .rate .web .shadow{
   width: 350px;
@@ -469,22 +453,9 @@ body{
   background-color: rgb(169, 169, 169);
 }
 
-.Skill .rate .graphics .bar2{
-  width: 330px;
-  height: 4px;
-  background-color: #0385ff;
-}
-.Skill .rate .compmain .bar3{
-  width: 310px;
-  height: 4px;
-  background-color: #0385ff;
-}
 
-.Skill .rate .software .bar4{
-  width: 300px;
-  height: 4px;
-  background-color: #0385ff;
-}
+
+
 
 .experience-page {
   display: flex;
@@ -751,40 +722,12 @@ body{
 
 }
 
-.toolimg{
-  display: flex;
-  justify-content: center;
-  align-items: start;
-  gap: 20px;
-  height: 80px;
-  width: 100%;
-  margin: 10px;
-  border-radius: 10px;}
-
-  .tools{
-    display: flex;
-    flex-direction: column;
-    width: 100px;
-    align-items: center ;
-  }
 
 
-.toolimg button{
-  height: 40px;
-  width: 100%;
-  border: solid 1px #5d5d5d;
-  background: none;
-  border-radius: 10px;
-  color: white ;
-  font-size: 12px;
-  
-}
-.toolimg button:hover{
-  background-color: #0385ff;
-  border: solid 1px #ffffff;
-  cursor: pointer;
-  box-shadow: 0 0 10px #0385ff;
-}
+
+
+
+
 
 
 @media (max-width: 768px) {
@@ -795,55 +738,50 @@ body{
     gap: 10px;
   }
 
-  .tools{
-    align-items: center ;
-  }
-
-  .sidebar{
-    display: flex;
-    height: 60px;
+  .experience-page {
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 5px 45px;
+    gap: 30px;
   }
-
-  .sidebarList{
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: center;
-    font-size: 12px;
-    margin-top: 10px;
-  }
-
-  .sidebar.collapsed {
-
-    height: 50px;
-    align-items: center;
-    padding: 10px;
-  } 
-
-  .sidebar .close{
-    left: 300px;
-    top: 25px;
-    font-size: 16px;
-  }
-
-  .row{
-    padding: 8px 6px;
-    justify-content: center;
-    align-items: center;
-  } 
-
-  .row .title{
-    display: none;
+  .sidebar.collapsed{
+    width: 20px;
   }
 
   .row #icon{
-    font-size: 20px;
+    width: 15px;
+    font-size: 12px;
+  }
+  .sidebar .close{
+    right: 10px;
+  }
+
+  .sidebarList .row{
+    padding: 0px;
+  }
+
+  .sidebarList #active{
+    background-color: transparent;
+    border-radius: 10px;
+  }
+  
+  .sidebarList .row:hover{
+    background-color: transparent;
+    cursor: pointer;
+    border-radius: solid 1px #bcbcbc;
+  }
+
+
+
+
+
+
+
+
+
+ 
+
+  .Hero .split {
+    flex-direction: column;
+    gap: 20px;
   }
 
   .Hero .split,
@@ -870,7 +808,7 @@ body{
   }
 
   .content h1{
-    font-size: 40px;
+    font-size: 20px;
   }
 }
 
@@ -879,7 +817,6 @@ body{
   .Hero {
     flex-direction: row;
     justify-content: space-evenly;
-    align-items: center;
   }
 
   .Hero .split {
@@ -1206,3 +1143,50 @@ body{
 .modal-details h2 { margin-top: 0; color: var(--green); }
 .meta-tags { display: flex; gap: 15px; margin-bottom: 15px; font-size: 0.9rem; color: #ccc; }
 .full-desc { line-height: 1.6; color: #ddd; white-space: pre-wrap; }
+
+/* -------------------------------------------------
+   SKILL COMPONENT MOBILE RESPONSIVENESS
+   ------------------------------------------------- */
+   @media (max-width: 768px) {
+    
+    /* Main Skill Container Adjustments */
+    .Skill {
+        padding: 40px 20px; /* Adjust padding for better look on small screens */
+        overflow-x: hidden; 
+        max-width: 300px;/* Prevent horizontal scroll */
+    }
+    
+    .Skill h1 {
+        font-size: 2rem; /* Make the title slightly smaller */
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    /* Stacking the four service boxes (.web, .graphics, .compmain, .software) */
+    .rate {
+        /* Assuming .rate is currently a grid or flexbox row/grid */
+        display: flex;
+        flex-direction: column; /* Stack the items vertically */
+        gap: 25px; /* Add clean spacing between stacked items */
+        align-items: stretch; /* Ensure items take full width */
+        padding: 0;
+    }
+
+    /* Individual Skill Items */
+    .rate > div { 
+        padding: 20px; /* Consistent padding inside each box */
+        width: auto; /* Allow items to take the necessary width */
+        max-width: none; /* Remove any desktop max-width constraints */
+        /* If your bars use absolute positioning, you might need to adjust them here */
+    }
+    
+    /* Ensure the content itself is readable */
+    .rate h3 {
+        font-size: 1.25rem;
+        margin-bottom: 5px;
+    }
+    
+    .rate p {
+        font-size: 0.95rem;
+    }
+}

@@ -1,9 +1,9 @@
 :root{
-    --dark-grey: #121212;
-    --panel-grey: #1f1f1f;
+    --dark-grey: #151515;
+    --panel-grey: #363636;
     --muted: #bdbdbd;
-    --xbox-green: #5fb7ff;
-    --hot-pink: #0064e7;
+    --xbox-green: #1c74bc;
+    --hot-pink: #0048a5;
   }
   
   /* Section and layout */
@@ -11,7 +11,7 @@
     position: relative;
     overflow: hidden;
     padding: 80px 20px;
-    background: linear-gradient(180deg, var(--dark-grey), #0b0b0b 60%);
+    background: linear-gradient(180deg, var(--dark-grey), #151515 60%);
     color: #fff;
     font-family: Inter, "Segoe UI", Roboto, system-ui, -apple-system, "Helvetica Neue", Arial;
   }
@@ -190,7 +190,7 @@
     cursor: pointer;
     padding: 10px 16px;
     border-radius: 9px;
-    font-weight: 700;
+    font-weight: 400;
     letter-spacing: 0.2px;
     border: 1px solid rgba(255,255,255,0.06);
     position: relative;
@@ -253,7 +253,7 @@
     margin: 14px auto 0;
     border-radius: 2px;
     background: linear-gradient(90deg, var(--xbox-green), var(--hot-pink));
-    box-shadow: 0 0 10px rgba(16, 54, 124, 0.6), 0 0 20px rgba(45, 150, 255, 0.12);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6), 0 0 20px rgba(45, 150, 255, 0.12);
     animation: pulseLine 2.6s ease-in-out infinite;
   }
   @keyframes pulseLine {

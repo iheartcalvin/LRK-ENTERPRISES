@@ -32,12 +32,12 @@ function App() {
             
             <div className='Hero'>
               <div className='split'>
-                <About />
-                <Tools />
-              </div>
-              <div id="skills" className="scroll-animate fade-left stagger">
+                <About /> 
                 <Skill />
               </div>
+              <Tools />
+
+              
             </div>
 
             {/* SERVICES SHOWCASE */}

@@ -5,10 +5,13 @@
   }
   
   .dq-section {
-    padding: 80px 20px;
+    padding: 20px 20px;
     background: #0f0f10;
     color: white;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
   .dq-title {
@@ -27,18 +30,19 @@
   
   .dq-form-wrapper {
     max-width: 700px;
-    margin: auto;
     background: rgba(255, 255, 255, 0.04);
-    padding: 30px;
+    padding: 20px;
     border-radius: 16px;
     border: 1px solid rgba(255, 255, 255, 0.06);
     backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
   }
   
   .dq-field {
     text-align: left;
     margin-bottom: 20px;
-    width: 100%;
+    width: 90%;
   }
   
   .dq-field label {
@@ -50,7 +54,9 @@
   .dq-field select,
   .dq-field input,
   .dq-field textarea {
-    width: 100%;
+    align-items: center;
+    display: block;
+    width: 90%;
     padding: 12px;
     background: rgba(255, 255, 255, 0.06);
     color: white;
@@ -63,7 +69,7 @@
     resize: vertical;
   }
   
-  .file-input {
+  .dp-field .file-input {
     padding: 10px;
     background: transparent;
     border: 1px dashed rgba(255, 255, 255, 0.3);
@@ -88,7 +94,7 @@
     width: 100%;
     border: none;
     border-radius: 10px;
-    background: linear-gradient(90deg, var(--green), #0fa012);
+    background: linear-gradient(90deg, var(--green), #049bff);
     cursor: pointer;
     color: white;
     font-size: 16px;
@@ -99,3 +105,11 @@
   .dq-btn:hover {
     box-shadow: 0 0 20px rgba(17, 124, 217, 0.8);
   }
+
+  @media (max-width: 600px) {
+    .dq-row {
+      flex-direction: column; /* This correctly stacks the Name/Email or Material/Thickness inputs */
+      gap: 0;
+    }
+  }
+  

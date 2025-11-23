@@ -1,8 +1,8 @@
 /* src/components/AdminDashboard.css */
 
 :root {
-    --neon-green: #00ff88;
-    --dark-bg: #0f0f10;
+    --neon-green: #00d5ff;
+    --dark-bg: #0f1010;
     --panel-bg: #1a1a1a;
     --text-main: #ffffff;
     --text-muted: #aaaaaa;
@@ -59,17 +59,26 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: radial-gradient(circle at center, #222, #000);
+    background: #111;
   }
   
   .login-box {
     background: rgba(255, 255, 255, 0.05);
     padding: 40px;
     border-radius: 15px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     text-align: center;
     border: 1px solid rgba(255, 255, 255, 0.1);
     width: 100%;
     max-width: 400px;
+  }
+
+  .login-box .login-logo {
+    width: 100px;
+    margin-bottom: 20px;
   }
   
   .login-box h1 {
@@ -78,7 +87,7 @@
   }
   
   .login-box input {
-    width: 100%;
+    width: 90%;
     padding: 12px;
     margin-bottom: 20px;
     background: #222;
@@ -91,9 +100,9 @@
   .login-box button {
     width: 100%;
     padding: 12px;
-    background: var(--neon-green);
-    border: none;
-    color: black;
+    background: transparent;
+    border: solid 1px var(--neon-green);
+    color: rgb(255, 255, 255);
     font-weight: bold;
     border-radius: 5px;
     cursor: pointer;
@@ -132,7 +141,7 @@
   .admin-form input,
   .admin-form select,
   .admin-form textarea {
-    width: 100%;
+    width: 90%;
     padding: 12px;
     margin-bottom: 15px;
     background: #222;
@@ -223,16 +232,16 @@
   
   /* --- Submit Button --- */
   .admin-form button[type="submit"] {
-    width: 100%;
+    display: flex;
+    width: 50%;
     padding: 14px;
-    background: linear-gradient(45deg, var(--neon-green), #00cc6a);
+    background: linear-gradient(45deg, var(--neon-green), #18d1ff);
     border: none;
-    color: black;
+    color: rgb(255, 255, 255);
     font-weight: bold;
     font-size: 16px;
     border-radius: 8px;
     cursor: pointer;
-    text-transform: uppercase;
   }
   
   /* --- Projects List (Right Side) --- */
@@ -339,9 +348,7 @@
     }
   }
 
-  /* Add to src/components/AdminDashboard.css */
 
-/* Tabs in Header */
 .tabs {
     display: flex;
     gap: 20px;
@@ -415,9 +422,13 @@
   
   /* Right Side Reply Panel */
   .reply-panel {
+    max-width: 500px;
     background: #1a1a1a;
     border: 1px solid var(--neon-green);
     padding: 20px;
+    gap: 15px;
+    display: flex;
+    flex-direction: column;
     border-radius: 10px;
     height: fit-content;
     position: sticky;
@@ -427,6 +438,33 @@
   .reply-panel h3 {
     color: var(--neon-green);
     margin-top: 0;
+  }
+
+  .reply-panel textarea {
+    width: 95%;
+    height: 150px;
+    background: #222;
+    border: 1px solid #444;
+    border-radius: 8px;
+    color: white;
+    padding: 10px;
+    font-family: inherit;
+    resize: vertical;
+  }
+
+  .reply-panel input[type="text"] {
+    width: 95%;
+    padding: 10px;
+    background: #222;
+    border: 1px solid #444;
+    border-radius: 8px;
+    color: white;
+    font-family: inherit;
+  }
+
+  .reply-panel textarea:focus {
+    border-color: var(--neon-green);
+    box-shadow: 0 0 5px rgba(0, 213, 255, 0.5);
   }
   
   .reply-actions {
@@ -448,3 +486,86 @@
     color: black;
     font-weight: bold;
   }
+
+  /* --- AdminDashboard.css: New/Updated Rules --- */
+
+/* --- General Mobile Layout (Screens < 900px) --- */
+@media (max-width: 900px) {
+    
+    /* STACKING FOR MAIN ADMIN PAGE GRID */
+    .admin-content {
+      grid-template-columns: 1fr; /* Switch to single column */
+      padding: 20px; /* Reduce padding on mobile */
+      gap: 20px;
+    }
+    
+    /* STACKING FOR PROJECT FORM INPUTS */
+    .form-row {
+      flex-direction: column; /* Stack side-by-side inputs */
+      gap: 0;
+    }
+    
+    /* Keep the form order, but remove sticky behavior */
+    .admin-form {
+      position: static; 
+      order: 1;
+      padding: 20px;
+    }
+    
+    /* QUOTES INBOX MANAGER FIX */
+    .quotes-manager {
+      grid-template-columns: 1fr; /* Stack the Inbox List and Reply Panel */
+      gap: 20px;
+    }
+    
+    /* Reply Panel should display above the list when active on mobile */
+    .reply-panel {
+      position: static; /* Remove sticky behavior */
+      order: -1; 
+    }
+
+    /* Small Adjustments for Project Items */
+    .project-item {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+    }
+
+    .p-img {
+        margin-bottom: 10px;
+        width: 100%;
+        height: 120px;
+    }
+    .p-info {
+        margin-bottom: 10px;
+    }
+}
+
+/* --- Extra Small Screen Adjustments (Screens < 600px) --- */
+@media (max-width: 600px) {
+    .admin-header-full {
+      padding: 10px 15px;
+      flex-wrap: wrap; /* Allow elements to wrap */
+      gap: 10px;
+    }
+    
+    .admin-header-full h1 {
+      font-size: 1.2rem;
+    }
+    
+    .tabs {
+      flex-basis: 100%; /* Make tabs take full width */
+      justify-content: space-around;
+      gap: 0;
+    }
+}
+
+.hint-text {
+    margin-top: 10px;
+    font-size: 0.75rem;
+    color: #ff9900; /* Orange-yellow warning color */
+    background: rgba(255, 153, 0, 0.1);
+    padding: 8px;
+    border-radius: 5px;
+    border-left: 3px solid #ff9900;
+}
